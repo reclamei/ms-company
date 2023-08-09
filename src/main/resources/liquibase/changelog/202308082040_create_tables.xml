@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="202308082040-1" author="liviaaurich">
+        <createTable tableName="company">
+            <column name="id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sac_phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cnpj" type="VARCHAR(14)">
+                <constraints unique="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="company" constraintName="COMPANY_PK" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202308082040-2" author="liviaaurich">
+        <createTable tableName="head">
+            <column name="id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(50)">
+                <constraints unique="true"/>
+            </column>
+            <column name="company_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="head" constraintName="HEAD_PK" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="head" baseColumnNames="company_id" constraintName="COMPANY_HEAD_FK"
+                                 referencedTableName="company" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202308082040-3" author="liviaaurich">
+        <createTable tableName="service_type">
+            <column name="id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="service_type" constraintName="SERVICE_TYPE_PK" columnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202308082040-4" author="liviaaurich">
+        <createTable tableName="service_subtype">
+            <column name="id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_type_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="service_subtype" constraintName="SERVICE_SUBTYPE_PK" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="service_subtype" baseColumnNames="service_type_id" constraintName="SERVICE_TYPE_SUBTYPE_FK"
+                                 referencedTableName="service_type" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202308082040-5" author="liviaaurich">
+        <createTable tableName="coverage">
+            <column name="company_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_type_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="coverage" constraintName="COVERAGE_PK" columnNames="company_id, service_type_id"/>
+        <addForeignKeyConstraint baseTableName="coverage" baseColumnNames="company_id" constraintName="COMPANY_COVERAGE_FK"
+                                 referencedTableName="company" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="coverage" baseColumnNames="service_type_id" constraintName="SERVICE_TYPE_COVERAGE_FK"
+                                 referencedTableName="service_type" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202308082040-6" author="liviaaurich">
+        <createTable tableName="location">
+            <column name="id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="coverage_company_id" type="BIGINT(20)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="coverage_service_type_id" type="BIGINT(20)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="location" constraintName="LOCATION_PK" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="location" baseColumnNames="coverage_company_id, coverage_service_type_id" constraintName="COVERAGE_LOCATION_FK"
+                                 referencedTableName="coverage" referencedColumnNames="company_id, service_type_id"/>
+    </changeSet>
+
+</databaseChangeLog>
