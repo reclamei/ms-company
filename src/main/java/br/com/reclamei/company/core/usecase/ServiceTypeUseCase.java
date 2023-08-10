@@ -17,8 +17,8 @@ public record ServiceTypeUseCase(ServiceTypeGateway gateway) {
         return gateway.findById(id);
     }
 
-    public void deleteCitizenById(final Long id) {
-        log.info("[ServiceTypeUseCase] :: deleteCitizenById :: Deleting service type with id {}", id);
+    public void deleteById(final Long id) {
+        log.info("[ServiceTypeUseCase] :: deleteById :: Deleting service type with id {}", id);
         gateway.deleteById(id);
     }
 }

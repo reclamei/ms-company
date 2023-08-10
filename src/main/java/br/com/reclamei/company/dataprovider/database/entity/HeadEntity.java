@@ -28,11 +28,11 @@ public class HeadEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "login", nullable = false)
-    private String login;
-
-    @Column(name = "password", nullable = false)
-    private String password;
+//    @Column(name = "login", nullable = false)
+//    private String login;
+//
+//    @Column(name = "password", nullable = false)
+//    private String password;
 
     @Column(name = "phone", nullable = false)
     private String phone;
