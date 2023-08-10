@@ -1,3 +1,5 @@
+server:
+    port: 8081
 spring:
     application:
         name: ms-company
@@ -21,4 +23,4 @@ spring:
     liquibase:
         enabled: true
         change-log: classpath:/liquibase/master.xml
-        default-schema: db_company
+        default-schema: company_db

@@ -4,17 +4,21 @@ services:
     hostname: localhost
     image: mysql:8.0.30
     command: --max_allowed_packet=512M
+    restart: always
     volumes:
       - db:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d/
     environment:
-      MYSQL_ROOT_PASSWORD: rootroot
-      MYSQL_DATABASE: company
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: company_db
     networks:
       - bubble
     ports:
-      - '8307:3306'
+      - '3306:3306'
 
 networks:
   bubble:
     external: true
+
+volumes:
+  db:
