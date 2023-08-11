@@ -21,7 +21,7 @@ public class DatabaseConfiguration {
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
         liquibase.setShouldRun(liquibaseProperties.isEnabled());
-        log.debug("Configuring Liquibase");
+        log.debug("Configuring Liquibase ended successfully");
         return liquibase;
     }
 }
