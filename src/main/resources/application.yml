@@ -1,1 +1,24 @@
-
+spring:
+    application:
+        name: ms-company
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://${COMPANY_DB_HOST}:${COMPANY_DB_PORT}/${COMPANY_DB_NAME}?createDatabaseIfNotExist=true&${COMPANY_DB_OPTS}&${COMPANY_DB_SESSION_OPTS}
+        username: ${COMPANY_DB_USER}
+        password: ${COMPANY_DB_PASSWORD}
+        hikari:
+            poolName: Hikari
+            auto-commit: false
+            connection-test-query: SELECT 1
+    jpa:
+        show-sql: true
+        open-in-view: false
+        database: default
+        hibernate.ddl-auto: none
+        database-platform: org.hibernate.dialect.MySQLDialect
+        properties.hibernate:
+            jdbc.time_zone: UTC
+    liquibase:
+        enabled: true
+        change-log: classpath:/liquibase/master.xml
+        default-schema: db_company
