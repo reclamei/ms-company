@@ -12,4 +12,9 @@ public record CoverageUseCase(CoverageGateway gateway) {
         gateway.save(domain);
     }
 
+    public void deleteById(final Long serviceTypeId, final Long companyId) {
+        log.info("[CoverageUseCase] :: deleteById :: Deleting coverage with id [service_type_id: {}, company_id: {}]", serviceTypeId, companyId);
+        gateway.deleteById(serviceTypeId, companyId);
+    }
+
 }

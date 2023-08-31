@@ -6,4 +6,6 @@ public interface CoverageGateway {
 
     void save(CoverageDomain domain);
 
+    void deleteById(Long serviceTypeId, Long companyId);
+
 }

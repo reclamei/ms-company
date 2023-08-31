@@ -19,4 +19,8 @@ public record CoverageFacade(CoverageApiMapper mapper, CoverageUseCase useCase) 
         useCase.save(domain);
     }
 
+    public void deleteById(final Long serviceTypeId, final Long companyId) {
+        useCase.deleteById(serviceTypeId, companyId);
+    }
+
 }

@@ -6,6 +6,7 @@ import br.com.reclamei.company.entrypoint.api.facade.CoverageFacade;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,13 @@ public class CoverageController implements CoveragesApi {
     public ResponseEntity<Void> create(@Valid @RequestBody final CoverageCreateRequest body) {
         facade.create(body);
         return ResponseEntity.status(CREATED).build();
+    }
+
+    @Override
+    @DeleteMapping("/{serviceTypeId}/{companyId}")
+    public ResponseEntity<Void> delete(final Long serviceTypeId, final Long companyId) {
+        facade.deleteById(serviceTypeId, companyId);
+        return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override

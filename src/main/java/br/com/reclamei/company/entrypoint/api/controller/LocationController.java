@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,11 +45,13 @@ public class LocationController implements LocationsApi {
     }
 
     @Override
+    @GetMapping("/{latitude}/{longitude}")
     public ResponseEntity<LocationResponse> findByLocalization(final BigDecimal latitude, final BigDecimal longitude) {
         return null;
     }
 
     @Override
+    @GetMapping
     public ResponseEntity<List<LocationResponse>> findAll() {
         return ResponseEntity.status(OK).body(facade.findAll());
     }
