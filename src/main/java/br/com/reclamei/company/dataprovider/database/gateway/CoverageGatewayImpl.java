@@ -10,7 +10,7 @@ import br.com.reclamei.company.dataprovider.database.mapper.CoverageDatabaseMapp
 import br.com.reclamei.company.dataprovider.database.repository.CoverageRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public record CoverageGatewayImpl(CoverageDatabaseMapper mapper, CoverageRepository repository) implements CoverageGateway {
@@ -18,15 +18,17 @@ public record CoverageGatewayImpl(CoverageDatabaseMapper mapper, CoverageReposit
     @Override
     public void save(final CoverageDomain domain) {
         var entity = mapper.toEntity(domain);
-
-        final var coverage = new CoverageEntity(entity.getId());
-        final var locations = domain.getLocations().stream().map(item -> {
-            final var pk = new RelCoverageLocationPK(coverage, new LocationEntity(item.getId()));
-            return new RelCoverageLocationEntity(pk);
-        }).collect(Collectors.toList());
-        entity.setLocations(locations);
+        entity.setLocations(buildRelLocations(domain, entity));
 
         repository.save(entity);
+    }
+
+    private static List<RelCoverageLocationEntity> buildRelLocations(final CoverageDomain domain, final CoverageEntity entity) {
+        final var coverage = new CoverageEntity(entity.getId());
+        return domain.getLocations()
+            .stream()
+            .map(item -> new RelCoverageLocationEntity(new RelCoverageLocationPK(coverage, new LocationEntity(item.getId()))))
+            .toList();
     }
 
 }
