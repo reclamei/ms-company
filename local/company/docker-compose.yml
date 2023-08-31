@@ -9,7 +9,7 @@ services:
             - ./mysql:/docker-entrypoint-initdb.d/
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: public
+            MYSQL_DATABASE: company_db
         networks:
             - bubble
         ports:

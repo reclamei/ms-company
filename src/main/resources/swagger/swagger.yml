@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+    title: ms-company
+    version: v1
+servers:
+    -   url: http://localhost:8081
+paths:
+    /service-types:
+        post:
+            tags:
+                - service-types
+            operationId: create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ServiceTypeCreateRequest"
+                required: true
+            responses:
+                '201':
+                    description: The service type was created successfully
+                '400':
+                    description: Error creating the service type
+        put:
+            tags:
+                - service-types
+            operationId: update
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ServiceTypeUpdateRequest"
+                required: true
+            responses:
+                '204':
+                    description: The service type was update successfully
+                '400':
+                    description: Error creating the service type
+        get:
+            tags:
+                - service-types
+            operationId: findById
+            parameters:
+                -   name: id
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Service type was found
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/ServiceTypeResponse"
+                '404':
+                    description: Service type was not found
+        delete:
+            tags:
+                - service-types
+            operationId: deleteById
+            parameters:
+                -   name: id
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '204':
+                    description: Service type was successfully deleted
+                '404':
+                    description: Service type was not found
+components:
+    schemas:
+        ServiceTypeCreateRequest:
+            required:
+                - name
+                - description
+            type: object
+            properties:
+                name:
+                    type: string
+                    example: Harry Potter
+                description:
+                    type: string
+                    example: Harry Potter Description
+                subtypes:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            name:
+                                type: string
+                            description:
+                                type: string
+        ServiceTypeUpdateRequest:
+            required:
+                - id
+                - name
+                - description
+            type: object
+            properties:
+                id:
+                    type: long
+                name:
+                    type: string
+                    example: Harry Potter
+                description:
+                    type: string
+                    example: Harry Potter Description
+                subtypes:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                            description:
+                                type: string
+        ServiceTypeResponse:
+            type: object
+            properties:
+                id:
+                    type: long
+                name:
+                    type: string
+                    example: Harry Potter
+                description:
+                    type: string
+                    example: Harry Potter Description
+                subtypes:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                            description:
+                                type: string
