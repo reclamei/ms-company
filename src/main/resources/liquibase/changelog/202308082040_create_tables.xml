@@ -115,15 +115,27 @@
             <column name="name" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202308302040-6" author="liviaaurich">
+        <createTable tableName="rel_coverage_location">
             <column name="coverage_company_id" type="BIGINT(20)">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>
             <column name="coverage_service_type_id" type="BIGINT(20)">
-                <constraints unique="true" nullable="false"/>
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="location" baseColumnNames="coverage_company_id, coverage_service_type_id" constraintName="COVERAGE_LOCATION_FK"
-                                 referencedTableName="coverage" referencedColumnNames="company_id, service_type_id"/>
+        <addPrimaryKey tableName="rel_coverage_location" constraintName="REL_COVERAGE_LOCATION_PK" columnNames="coverage_company_id, coverage_service_type_id, location_id"/>
+
+        <addForeignKeyConstraint baseTableName="rel_coverage_location" baseColumnNames="coverage_company_id, coverage_service_type_id"
+                                 constraintName="REL_COVERAGE_FK" referencedTableName="coverage" referencedColumnNames="company_id, service_type_id"/>
+        <addForeignKeyConstraint baseTableName="rel_coverage_location" baseColumnNames="location_id" constraintName="REL_LOCATION_FK"
+                                 referencedTableName="location" referencedColumnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>

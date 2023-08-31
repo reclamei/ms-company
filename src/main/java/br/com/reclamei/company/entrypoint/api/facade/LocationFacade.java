@@ -2,9 +2,12 @@ package br.com.reclamei.company.entrypoint.api.facade;
 
 import br.com.reclamei.company.core.usecase.LocationUseCase;
 import br.com.reclamei.company.entrypoint.api.dto.LocationCreateRequest;
+import br.com.reclamei.company.entrypoint.api.dto.LocationResponse;
 import br.com.reclamei.company.entrypoint.api.dto.LocationUpdateRequest;
 import br.com.reclamei.company.entrypoint.api.mapper.LocationApiMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public record LocationFacade(LocationApiMapper mapper, LocationUseCase useCase) {
@@ -21,6 +24,10 @@ public record LocationFacade(LocationApiMapper mapper, LocationUseCase useCase) 
 
     public void deleteById(final Long id) {
         useCase.deleteById(id);
+    }
+
+    public List<LocationResponse> findAll() {
+        return mapper.toResponse(useCase.findAll());
     }
 
 }

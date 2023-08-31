@@ -4,6 +4,8 @@ import br.com.reclamei.company.core.domain.LocationDomain;
 import br.com.reclamei.company.core.gateway.LocationGateway;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public record LocationUseCase(LocationGateway gateway) {
 
@@ -15,6 +17,11 @@ public record LocationUseCase(LocationGateway gateway) {
     public void deleteById(final Long id) {
         log.info("[LocationUseCase] :: deleteById :: Deleting location with id {}", id);
         gateway.deleteById(id);
+    }
+
+    public List<LocationDomain> findAll() {
+        log.info("[LocationUseCase] :: findAll :: Find all locations");
+        return gateway.findAll();
     }
 
 }

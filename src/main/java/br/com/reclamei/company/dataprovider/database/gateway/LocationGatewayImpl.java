@@ -7,6 +7,8 @@ import br.com.reclamei.company.dataprovider.database.mapper.LocationDatabaseMapp
 import br.com.reclamei.company.dataprovider.database.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static java.lang.String.format;
 
 @Service
@@ -24,6 +26,11 @@ public record LocationGatewayImpl(LocationDatabaseMapper mapper, LocationReposit
             throw new NotFoundException(format("[LocationGatewayImpl] :: deleteById :: Location with id %s not found", id));
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<LocationDomain> findAll() {
+        return mapper.toDomain(repository.findAll());
     }
 
 }
