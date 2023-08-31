@@ -26,7 +26,7 @@ public record ServiceTypeFacade(ServiceTypeApiMapper mapper, ServiceTypeUseCase 
     }
 
     public void deleteById(final Long id) {
-        useCase.deleteCitizenById(id);
+        useCase.deleteById(id);
     }
 
 }

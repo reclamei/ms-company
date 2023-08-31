@@ -44,12 +44,12 @@
             <column name="phone" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="login" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="VARCHAR(50)">
-                <constraints unique="true"/>
-            </column>
+<!--            <column name="login" type="VARCHAR(50)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="password" type="VARCHAR(50)">-->
+<!--                <constraints unique="true"/>-->
+<!--            </column>-->
             <column name="company_id" type="BIGINT(20)">
                 <constraints nullable="false"/>
             </column>

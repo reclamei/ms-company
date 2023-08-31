@@ -70,6 +70,71 @@ paths:
                     description: Service type was successfully deleted
                 '404':
                     description: Service type was not found
+    /companies:
+        post:
+            tags:
+                - companies
+            operationId: create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CompanyCreateRequest"
+                required: true
+            responses:
+                '201':
+                    description: The company was created successfully
+                '400':
+                    description: Error creating the company
+        put:
+            tags:
+                - companies
+            operationId: update
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CompanyUpdateRequest"
+                required: true
+            responses:
+                '204':
+                    description: The company was update successfully
+                '400':
+                    description: Error creating the company
+        get:
+            tags:
+                - companies
+            operationId: findById
+            parameters:
+                -   name: id
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Company was found
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/CompanyResponse"
+                '404':
+                    description: Company was not found
+        delete:
+            tags:
+                - companies
+            operationId: deleteById
+            parameters:
+                -   name: id
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '204':
+                    description: Company was successfully deleted
+                '404':
+                    description: Company was not found
 components:
     schemas:
         ServiceTypeCreateRequest:
@@ -141,3 +206,155 @@ components:
                                 type: string
                             description:
                                 type: string
+
+        CompanyCreateRequest:
+            required:
+                - name
+                - phone
+                - sacPhone
+                - email
+                - cnpj
+                - description
+            type: object
+            properties:
+                name:
+                    type: string
+                    example: Harry Potter
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                sacPhone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                cnpj:
+                    type: string
+                    format: cnpj
+                    example: 90796535000103
+                description:
+                    type: string
+                    example: Harry Potter Description
+                heads:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            name:
+                                type: string
+                                example: Harry Potter
+                            email:
+                                type: string
+                                format: email
+                                example: email@gmail.com
+                            phone:
+                                maxLength: 11
+                                minLength: 10
+                                type: string
+                                example: 11222223333
+        CompanyUpdateRequest:
+            required:
+                - id
+                - name
+                - description
+            type: object
+            properties:
+                id:
+                    type: long
+                name:
+                    type: string
+                    example: Harry Potter
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                sacPhone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                cnpj:
+                    type: string
+                    format: cnpj
+                    example: 90796535000103
+                description:
+                    type: string
+                    example: Harry Potter Description
+                heads:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                                example: Harry Potter
+                            email:
+                                type: string
+                                format: email
+                                example: email@gmail.com
+                            phone:
+                                maxLength: 11
+                                minLength: 10
+                                type: string
+                                example: 11222223333
+        CompanyResponse:
+            type: object
+            properties:
+                id:
+                    type: long
+                name:
+                    type: string
+                    example: Harry Potter
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                sacPhone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                cnpj:
+                    type: string
+                    format: cnpj
+                    example: 90796535000103
+                description:
+                    type: string
+                    example: Harry Potter Description
+                heads:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                                example: Harry Potter
+                            email:
+                                type: string
+                                format: email
+                                example: email@gmail.com
+                            phone:
+                                maxLength: 11
+                                minLength: 10
+                                type: string
+                                example: 11222223333

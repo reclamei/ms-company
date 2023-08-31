@@ -1,9 +1,9 @@
 package br.com.reclamei.company.entrypoint.api.controller;
 
-import br.com.reclamei.company.entrypoint.api.dto.ServiceTypeCreateRequest;
-import br.com.reclamei.company.entrypoint.api.dto.ServiceTypeResponse;
-import br.com.reclamei.company.entrypoint.api.dto.ServiceTypeUpdateRequest;
-import br.com.reclamei.company.entrypoint.api.facade.ServiceTypeFacade;
+import br.com.reclamei.company.entrypoint.api.dto.CompanyCreateRequest;
+import br.com.reclamei.company.entrypoint.api.dto.CompanyResponse;
+import br.com.reclamei.company.entrypoint.api.dto.CompanyUpdateRequest;
+import br.com.reclamei.company.entrypoint.api.facade.CompanyFacade;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +22,15 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/service-types")
-public class ServiceTypeController implements ServiceTypesApi {
+@RequestMapping("/companies")
+public class CompanyController implements CompaniesApi {
 
-    private final ServiceTypeFacade facade;
+    private final CompanyFacade facade;
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody final ServiceTypeCreateRequest request) {
-        facade.create(request);
+    public ResponseEntity<Void> create(@Valid @RequestBody final CompanyCreateRequest body) {
+        facade.create(body);
         return ResponseEntity.status(CREATED).build();
     }
 
@@ -43,14 +43,14 @@ public class ServiceTypeController implements ServiceTypesApi {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<ServiceTypeResponse> findById(@PathVariable final Long id) {
+    public ResponseEntity<CompanyResponse> findById(@PathVariable final Long id) {
         return ResponseEntity.status(OK).body(facade.findById(id));
     }
 
     @Override
     @PutMapping
-    public ResponseEntity<Void> update(@Valid @RequestBody final ServiceTypeUpdateRequest request) {
-        facade.update(request);
+    public ResponseEntity<Void> update(@Valid @RequestBody final CompanyUpdateRequest body) {
+        facade.update(body);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
