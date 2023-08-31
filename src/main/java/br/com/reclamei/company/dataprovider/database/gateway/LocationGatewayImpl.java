@@ -33,4 +33,12 @@ public record LocationGatewayImpl(LocationDatabaseMapper mapper, LocationReposit
         return mapper.toDomain(repository.findAll());
     }
 
+    @Override
+    public LocationDomain findByLocalization(final String city) {
+        if (!repository.existsByName(city)) {
+            throw new NotFoundException(format("[LocationGatewayImpl] :: findByLocalization :: Location with name %s not found", city));
+        }
+        return mapper.toDomain(repository.findByName(city));
+    }
+
 }

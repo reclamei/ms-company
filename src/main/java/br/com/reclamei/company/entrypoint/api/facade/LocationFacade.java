@@ -30,4 +30,8 @@ public record LocationFacade(LocationApiMapper mapper, LocationUseCase useCase) 
         return mapper.toResponse(useCase.findAll());
     }
 
+    public LocationResponse findByLocalization(final String latitude, final String longitude) {
+        return mapper.toResponse(useCase.findByLocalization(latitude, longitude));
+    }
+
 }
