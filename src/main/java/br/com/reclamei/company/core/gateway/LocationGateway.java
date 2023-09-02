@@ -12,4 +12,6 @@ public interface LocationGateway {
 
     List<LocationDomain> findAll();
 
+    LocationDomain findByLocalization(String city);
+
 }

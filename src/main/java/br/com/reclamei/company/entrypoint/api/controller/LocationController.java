@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -46,8 +45,8 @@ public class LocationController implements LocationsApi {
 
     @Override
     @GetMapping("/{latitude}/{longitude}")
-    public ResponseEntity<LocationResponse> findByLocalization(final BigDecimal latitude, final BigDecimal longitude) {
-        return null;
+    public ResponseEntity<LocationResponse> findByLocalization(final String latitude, final String longitude) {
+        return ResponseEntity.status(OK).body(facade.findByLocalization(latitude, longitude));
     }
 
     @Override

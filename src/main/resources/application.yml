@@ -24,3 +24,19 @@ spring:
         enabled: true
         change-log: classpath:/liquibase/master.xml
         default-schema: company_db
+    cloud:
+      openfeign:
+        client:
+            config:
+                geocode-client:
+                    url: ${COMPANY_GEOCODE_BASE_URL}
+                    connect-timeout: 5000
+                    read-timeout: 5000
+                default:
+                    default-request-headers:
+                        Accept: application/json
+                    retryer: feign.Retryer.Default
+                    connectTimeout: 5000
+                    readTimeout: 5000
+                    loggerLevel: basic
+            refresh-enabled: true

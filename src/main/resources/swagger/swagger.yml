@@ -206,12 +206,12 @@ paths:
                     in: path
                     required: true
                     schema:
-                        type: number
+                        type: string
                 -   name: longitude
                     in: path
                     required: true
                     schema:
-                        type: number
+                        type: string
             responses:
                 '200':
                     description: Location was found

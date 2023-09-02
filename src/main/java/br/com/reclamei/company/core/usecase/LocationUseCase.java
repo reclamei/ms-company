@@ -1,13 +1,15 @@
 package br.com.reclamei.company.core.usecase;
 
 import br.com.reclamei.company.core.domain.LocationDomain;
+import br.com.reclamei.company.core.gateway.GeocodeGateway;
 import br.com.reclamei.company.core.gateway.LocationGateway;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;
 
 @Slf4j
-public record LocationUseCase(LocationGateway gateway) {
+public record LocationUseCase(LocationGateway gateway, GeocodeGateway geocodeGateway) {
 
     public void save(final LocationDomain domain) {
         log.info("[LocationUseCase] :: create :: Creating new location. {}", domain);
@@ -22,6 +24,13 @@ public record LocationUseCase(LocationGateway gateway) {
     public List<LocationDomain> findAll() {
         log.info("[LocationUseCase] :: findAll :: Find all locations");
         return gateway.findAll();
+    }
+
+    public LocationDomain findByLocalization(final String latitude, final String longitude) {
+        log.info("[LocationUseCase] :: findByLocalization :: Find location by [latitude: {}, longitude: {}]", latitude, longitude);
+        final var address = geocodeGateway.getAddress(latitude, longitude);
+        final var city = ObjectUtils.defaultIfNull(address.getTown(), address.getCity());
+        return gateway.findByLocalization(city);
     }
 
 }
