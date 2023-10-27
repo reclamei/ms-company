@@ -40,3 +40,7 @@ spring:
                     readTimeout: 5000
                     loggerLevel: basic
             refresh-enabled: true
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_SERVICE_URL}/eureka
