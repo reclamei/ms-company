@@ -1,5 +1,6 @@
 server:
     port: 8081
+    forward-headers-strategy: framework
 spring:
     application:
         name: ms-company
@@ -44,3 +45,6 @@ eureka:
     client:
         serviceUrl:
             defaultZone: ${EUREKA_SERVICE_URL}/eureka
+springdoc:
+    cache:
+        disabled: true
