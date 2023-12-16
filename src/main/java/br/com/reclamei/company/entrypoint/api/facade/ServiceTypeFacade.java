@@ -7,6 +7,8 @@ import br.com.reclamei.company.entrypoint.api.dto.ServiceTypeUpdateRequest;
 import br.com.reclamei.company.entrypoint.api.mapper.ServiceTypeApiMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public record ServiceTypeFacade(ServiceTypeApiMapper mapper, ServiceTypeUseCase useCase) {
 
@@ -27,6 +29,11 @@ public record ServiceTypeFacade(ServiceTypeApiMapper mapper, ServiceTypeUseCase 
 
     public void deleteById(final Long id) {
         useCase.deleteById(id);
+    }
+
+    public List<ServiceTypeResponse> findAll() {
+        var domainList = useCase.findAll();
+        return mapper.toResponse(domainList);
     }
 
 }

@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ServiceTypeApiMapper {
 
@@ -17,5 +19,7 @@ public interface ServiceTypeApiMapper {
     ServiceTypeResponse toResponse(ServiceTypeDomain domain);
 
     ServiceTypeDomain toDomain(ServiceTypeUpdateRequest resquest);
+
+    List<ServiceTypeResponse> toResponse(List<ServiceTypeDomain> domain);
 
 }

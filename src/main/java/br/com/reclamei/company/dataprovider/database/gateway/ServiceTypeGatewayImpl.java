@@ -7,6 +7,8 @@ import br.com.reclamei.company.dataprovider.database.mapper.ServiceTypeDatabaseM
 import br.com.reclamei.company.dataprovider.database.repository.ServiceTypeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static java.lang.String.format;
 
 @Service
@@ -33,6 +35,11 @@ public record ServiceTypeGatewayImpl(ServiceTypeDatabaseMapper mapper, ServiceTy
             throw new NotFoundException(format("[ServiceTypeGatewayImpl] :: deleteById :: Service type with id %s not found", id));
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<ServiceTypeDomain> findAll() {
+        return mapper.toDomain(repository.findAll());
     }
 
 }
