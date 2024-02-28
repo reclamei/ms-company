@@ -4,6 +4,8 @@ import br.com.reclamei.company.core.domain.ServiceTypeDomain;
 import br.com.reclamei.company.core.gateway.ServiceTypeGateway;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public record ServiceTypeUseCase(ServiceTypeGateway gateway) {
 
@@ -20,5 +22,10 @@ public record ServiceTypeUseCase(ServiceTypeGateway gateway) {
     public void deleteById(final Long id) {
         log.info("[ServiceTypeUseCase] :: deleteById :: Deleting service type with id {}", id);
         gateway.deleteById(id);
+    }
+
+    public List<ServiceTypeDomain> findAll() {
+        log.info("[ServiceTypeUseCase] :: findAll :: Finding all service types");
+        return gateway.findAll();
     }
 }
