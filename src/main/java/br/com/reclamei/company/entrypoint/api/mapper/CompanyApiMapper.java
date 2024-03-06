@@ -1,5 +1,6 @@
 package br.com.reclamei.company.entrypoint.api.mapper;
 
+import br.com.reclamei.company.core.domain.CompanyDetailsDomain;
 import br.com.reclamei.company.core.domain.CompanyDomain;
 import br.com.reclamei.company.entrypoint.api.dto.CompanyCreateRequest;
 import br.com.reclamei.company.entrypoint.api.dto.CompanyResponse;
@@ -17,4 +18,7 @@ public interface CompanyApiMapper {
     CompanyResponse toResponse(CompanyDomain domain);
 
     CompanyDomain toDomain(CompanyUpdateRequest resquest);
+
+    CompanyResponse toResponse(CompanyDetailsDomain domain);
+
 }

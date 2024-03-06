@@ -28,4 +28,9 @@ public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
     public void deleteById(final Long id) {
         useCase.deleteById(id);
     }
+
+    public CompanyResponse getCompanyDetailsByCnpj(final String cnpj) {
+        return mapper.toResponse(useCase.getCompanyDetailsByCnpj(cnpj));
+    }
+
 }
