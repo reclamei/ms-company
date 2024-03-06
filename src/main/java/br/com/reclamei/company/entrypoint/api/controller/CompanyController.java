@@ -48,6 +48,12 @@ public class CompanyController implements CompaniesApi {
     }
 
     @Override
+    @GetMapping("/cnpj/{cnpj}")
+    public ResponseEntity<CompanyResponse> getCompanyDetailsByCnpj(@PathVariable final String cnpj) {
+        return ResponseEntity.status(OK).body(facade.getCompanyDetailsByCnpj(cnpj));
+    }
+
+    @Override
     @PutMapping
     public ResponseEntity<Void> update(@Valid @RequestBody final CompanyUpdateRequest body) {
         facade.update(body);
