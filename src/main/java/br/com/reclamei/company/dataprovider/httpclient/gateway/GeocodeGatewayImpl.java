@@ -5,9 +5,7 @@ import br.com.reclamei.company.core.gateway.GeocodeGateway;
 import br.com.reclamei.company.dataprovider.httpclient.GeocodeFeignClient;
 import br.com.reclamei.company.dataprovider.httpclient.mapper.AddressMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class GeocodeGatewayImpl implements GeocodeGateway {
 
