@@ -7,6 +7,8 @@ import br.com.reclamei.company.entrypoint.api.dto.CompanyUpdateRequest;
 import br.com.reclamei.company.entrypoint.api.mapper.CompanyApiMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
 
@@ -33,4 +35,7 @@ public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
         return mapper.toResponse(useCase.getCompanyDetailsByCnpj(cnpj));
     }
 
+    public CompanyResponse getCompanyByHeadExternalId(final UUID externalId) {
+        return mapper.toResponse(useCase.getCompanyByHeadExternalId(externalId));
+    }
 }

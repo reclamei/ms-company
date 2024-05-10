@@ -12,4 +12,5 @@ public class CompanyDetailsDomain {
     private String cnpj;
     private String email;
     private String description;
+    private String phone;
 }

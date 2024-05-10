@@ -22,6 +22,10 @@ public class CompanyDetailsResponse {
     public static class CommercialPlaceResponse {
         private String cnpj;
         private String email;
+        @JsonProperty("ddd1")
+        private String ddd;
+        @JsonProperty("telefone1")
+        private String phone;
 
         @JsonProperty("atividade_principal")
         private MainActivityResponse mainActivity;
