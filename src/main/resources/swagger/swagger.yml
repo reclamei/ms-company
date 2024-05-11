@@ -480,15 +480,12 @@ components:
         CompanyUpdateRequest:
             required:
                 - id
-                - name
-                - description
             type: object
             properties:
                 id:
                     type: long
-                name:
+                site:
                     type: string
-                    example: Harry Potter
                 phone:
                     maxLength: 11
                     minLength: 10
@@ -499,39 +496,9 @@ components:
                     minLength: 10
                     type: string
                     example: 11222223333
-                email:
-                    type: string
-                    format: email
-                    example: email@gmail.com
-                cnpj:
-                    type: string
-                    format: cnpj
-                    example: 90796535000103
                 description:
                     type: string
                     example: Harry Potter Description
-                heads:
-                    type: array
-                    items:
-                        type: object
-                        properties:
-                            id:
-                                type: long
-                            externalId:
-                                type: string
-                                format: uuid
-                            name:
-                                type: string
-                                example: Harry Potter
-                            email:
-                                type: string
-                                format: email
-                                example: email@gmail.com
-                            phone:
-                                maxLength: 11
-                                minLength: 10
-                                type: string
-                                example: 11222223333
         CompanyResponse:
             type: object
             properties:
@@ -540,6 +507,8 @@ components:
                 name:
                     type: string
                     example: Harry Potter
+                site:
+                    type: string
                 phone:
                     maxLength: 11
                     minLength: 10

@@ -19,7 +19,7 @@ public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
 
     public void update(final CompanyUpdateRequest request) {
         var domain = mapper.toDomain(request);
-        useCase.save(domain);
+        useCase.update(domain);
     }
 
     public CompanyResponse findById(final Long id) {

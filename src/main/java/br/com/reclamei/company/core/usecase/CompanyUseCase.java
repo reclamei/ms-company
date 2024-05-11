@@ -21,6 +21,11 @@ public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway compa
         gateway.save(domain);
     }
 
+    public void update(final CompanyDomain domain) {
+        log.info("[CompanyUseCase] :: update :: Updating company. {}", domain);
+        gateway.save(domain);
+    }
+
     public CompanyDomain findById(final Long id) {
         log.info("[CompanyUseCase] :: findById :: Finding company with id {}", id);
         return gateway.findById(id);

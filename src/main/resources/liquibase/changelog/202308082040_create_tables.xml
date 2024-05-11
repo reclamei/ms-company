@@ -12,6 +12,7 @@
             <column name="name" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
+            <column name="site" type="VARCHAR(50)"/>
             <column name="email" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>

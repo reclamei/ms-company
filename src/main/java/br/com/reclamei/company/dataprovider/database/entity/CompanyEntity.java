@@ -33,6 +33,9 @@ public class CompanyEntity {
     @Column(name = "sac_phone")
     private String sacPhone;
 
+    @Column(name = "site")
+    private String site;
+
     @Column(name = "email", nullable = false)
     private String email;
 
