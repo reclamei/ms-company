@@ -484,6 +484,17 @@ components:
             properties:
                 id:
                     type: long
+                cnpj:
+                    type: string
+                    format: cnpj
+                    example: 90796535000103
+                name:
+                    type: string
+                    example: Harry Potter
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
                 site:
                     type: string
                 phone:
@@ -540,6 +551,8 @@ components:
                             externalId:
                                 type: string
                                 format: uuid
+                            isAdmin:
+                                type: boolean
                             name:
                                 type: string
                                 example: Harry Potter
