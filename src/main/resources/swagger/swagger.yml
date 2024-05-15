@@ -86,6 +86,74 @@ paths:
                                 "$ref": "#/components/schemas/ServiceTypeResponse"
                 '404':
                     description: Service type was not found
+    /heads:
+        post:
+            tags:
+                - heads
+            operationId: create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/HeadCreateRequest"
+                required: true
+            responses:
+                '201':
+                    description: The head was created successfully
+                '400':
+                    description: Error creating the company
+        put:
+            tags:
+                - heads
+            operationId: update
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/HeadUpdateRequest"
+                required: true
+            responses:
+                '204':
+                    description: The head was update successfully
+                '400':
+                    description: Error updating the head
+        delete:
+            tags:
+                - companies
+            operationId: deleteById
+            parameters:
+                -   name: id
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '204':
+                    description: Head was successfully deleted
+                '404':
+                    description: Head was not found
+    /heads/company/{companyId}:
+        get:
+            tags:
+                - heads
+            operationId: getAllHeadsByCompanyId
+            parameters:
+                -   name: companyId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Heads was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/HeadResponse"
+                '404':
+                    description: Heads was not found
     /heads/{externalId}/confirm:
         patch:
             tags:
@@ -548,6 +616,8 @@ components:
                         properties:
                             id:
                                 type: long
+                            companyId:
+                                type: long
                             externalId:
                                 type: string
                                 format: uuid
@@ -565,6 +635,90 @@ components:
                                 minLength: 10
                                 type: string
                                 example: 11222223333
+
+        HeadCreateRequest:
+            required:
+                - externalId
+                - companyId
+                - name
+                - email
+                - phone
+            type: object
+            properties:
+                companyId:
+                    type: long
+                externalId:
+                    type: string
+                    format: uuid
+                isAdmin:
+                    type: boolean
+                name:
+                    type: string
+                    example: Harry Potter
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+        HeadUpdateRequest:
+            required:
+                - id
+                - externalId
+                - companyId
+                - name
+                - email
+                - phone
+            type: object
+            properties:
+                id:
+                    type: long
+                companyId:
+                    type: long
+                externalId:
+                    type: string
+                    format: uuid
+                isAdmin:
+                    type: boolean
+                name:
+                    type: string
+                    example: Harry Potter
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
+        HeadResponse:
+            type: object
+            properties:
+                id:
+                    type: long
+                companyId:
+                    type: long
+                externalId:
+                    type: string
+                    format: uuid
+                isAdmin:
+                    type: boolean
+                name:
+                    type: string
+                    example: Harry Potter
+                email:
+                    type: string
+                    format: email
+                    example: email@gmail.com
+                phone:
+                    maxLength: 11
+                    minLength: 10
+                    type: string
+                    example: 11222223333
 
         LocationCreateRequest:
             required:

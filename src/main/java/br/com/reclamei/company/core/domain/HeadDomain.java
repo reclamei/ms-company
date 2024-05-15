@@ -11,6 +11,7 @@ import java.util.UUID;
 public class HeadDomain {
 
     private Long id;
+    private Long companyId;
     private String email;
     private String name;
     private String phone;
