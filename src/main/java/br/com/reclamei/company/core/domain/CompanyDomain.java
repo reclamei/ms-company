@@ -12,6 +12,7 @@ public class CompanyDomain {
 
     private Long id;
     private String name;
+    private String site;
     private String phone;
     private String sacPhone;
     private String email;

@@ -12,15 +12,14 @@
             <column name="name" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
+            <column name="site" type="VARCHAR(50)"/>
             <column name="email" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
             <column name="phone" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="sac_phone" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="sac_phone" type="VARCHAR(50)"/>
             <column name="cnpj" type="VARCHAR(14)">
                 <constraints unique="true"/>
             </column>
@@ -35,22 +34,24 @@
             <column name="id" type="BIGINT(20)" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(50)">
-                <constraints unique="true" nullable="false"/>
-            </column>
+            <column name="name" type="VARCHAR(50)"/>
             <column name="email" type="VARCHAR(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="phone" type="VARCHAR(50)">
+            <column name="phone" type="VARCHAR(50)"/>
+            <column name="is_admin" type="BOOLEAN">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="status" type="CHAR(26)">
                 <constraints nullable="false"/>
             </column>
-<!--            <column name="login" type="VARCHAR(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="password" type="VARCHAR(50)">-->
-<!--                <constraints unique="true"/>-->
-<!--            </column>-->
+            <column name="external_id" type="CHAR(36)" defaultValueComputed="(uuid())">
+                <constraints nullable="false"/>
+            </column>
             <column name="company_id" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>

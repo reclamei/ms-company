@@ -30,8 +30,11 @@ public class CompanyEntity {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "sac_phone", nullable = false)
+    @Column(name = "sac_phone")
     private String sacPhone;
+
+    @Column(name = "site")
+    private String site;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -42,7 +45,7 @@ public class CompanyEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
     private List<HeadEntity> heads;
 
 }
