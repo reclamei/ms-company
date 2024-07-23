@@ -1,7 +1,10 @@
 package br.com.reclamei.company.dataprovider.database.entity;
 
+import br.com.reclamei.company.core.domain.HeadStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,9 +47,9 @@ public class HeadEntity {
     @Column(name = "phone")
     private String phone;
 
-    // TODO: Utilizar enum
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private HeadStatusEnum status;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

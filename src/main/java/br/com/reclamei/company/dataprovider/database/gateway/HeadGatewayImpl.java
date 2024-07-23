@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+import static br.com.reclamei.company.core.domain.HeadStatusEnum.CONFIRMED;
+
 @Service
 @RequiredArgsConstructor
 public class HeadGatewayImpl implements HeadGateway {
@@ -23,7 +25,7 @@ public class HeadGatewayImpl implements HeadGateway {
     @Override
     @Transactional
     public void confirmHead(final UUID externalId) {
-        repository.updateStatus("CONFIRMED", externalId);
+        repository.updateStatus(CONFIRMED, externalId);
     }
 
     @Override
