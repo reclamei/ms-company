@@ -670,6 +670,9 @@ components:
                                 minLength: 10
                                 type: string
                                 example: 11222223333
+                            createdAt:
+                                type: string
+                                format: date
 
         HeadCreateRequest:
             required:
