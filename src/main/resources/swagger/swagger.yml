@@ -154,6 +154,23 @@ paths:
                                     "$ref": "#/components/schemas/HeadResponse"
                 '404':
                     description: Heads was not found
+    /heads/{externalId}/deny:
+        patch:
+            tags:
+                - heads
+            operationId: denyHead
+            parameters:
+                -   name: externalId
+                    in: path
+                    required: true
+                    schema:
+                        type: string
+                        format: uuid
+            responses:
+                '204':
+                    description: The head was update successfully
+                '400':
+                    description: Error updating the head
     /heads/{externalId}/confirm:
         patch:
             tags:
@@ -278,6 +295,24 @@ paths:
                         application/json:
                             schema:
                                 "$ref": "#/components/schemas/CompanyResponse"
+                '404':
+                    description: Company details was not found
+                '400':
+                    description: Invalid external-id
+    /companies/pending-approval:
+        get:
+            tags:
+                - companies
+            operationId: getCompaniesPendingApproval
+            responses:
+                '200':
+                    description: Company was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CompanyResponse"
                 '404':
                     description: Company details was not found
                 '400':
@@ -635,6 +670,9 @@ components:
                                 minLength: 10
                                 type: string
                                 example: 11222223333
+                            createdAt:
+                                type: string
+                                format: date
 
         HeadCreateRequest:
             required:

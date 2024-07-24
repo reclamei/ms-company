@@ -6,6 +6,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static br.com.reclamei.company.core.domain.HeadStatusEnum.*;
+
 @Getter
 @Setter
 public class HeadDomain {
@@ -17,7 +19,7 @@ public class HeadDomain {
     private String phone;
     private Boolean isAdmin;
     private UUID externalId;
-    private String status = "PENDING_CONFIRMATION";
+    private HeadStatusEnum status = PENDING_CONFIRMATION;
     private LocalDateTime createdAt;
 
 }

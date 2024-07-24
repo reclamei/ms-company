@@ -34,4 +34,8 @@ public record HeadFacade(HeadApiMapper mapper, HeadUseCase useCase) {
     public List<HeadResponse> getAllHeadsByCompanyId(final Long companyId) {
         return mapper.toResponse(useCase.getAllHeadsByCompanyId(companyId));
     }
+
+    public void denyHead(final UUID externalId) {
+        useCase.denyHead(externalId);
+    }
 }

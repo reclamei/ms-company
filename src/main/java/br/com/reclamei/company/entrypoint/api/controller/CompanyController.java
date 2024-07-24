@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -47,6 +48,12 @@ public class CompanyController implements CompaniesApi {
     @GetMapping("/{id}")
     public ResponseEntity<CompanyResponse> findById(@PathVariable final Long id) {
         return ResponseEntity.status(OK).body(facade.findById(id));
+    }
+
+    @Override
+    @GetMapping("/pending-approval")
+    public ResponseEntity<List<CompanyResponse>> getCompaniesPendingApproval() {
+        return ResponseEntity.status(OK).body(facade.findCompaniesPendingApproval());
     }
 
     @Override
