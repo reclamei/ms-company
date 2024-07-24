@@ -1,13 +1,14 @@
 package br.com.reclamei.company.core.gateway;
 
 import br.com.reclamei.company.core.domain.HeadDomain;
+import br.com.reclamei.company.core.domain.HeadStatusEnum;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface HeadGateway {
 
-    void confirmHead(UUID externalId);
+    void updateHeadStatus(UUID externalId, HeadStatusEnum status);
 
     void deleteById(Long id);
 

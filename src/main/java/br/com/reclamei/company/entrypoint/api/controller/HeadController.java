@@ -33,7 +33,7 @@ public class HeadController implements HeadsApi {
 
     @Override
     @PatchMapping("/{externalId}/confirm")
-    public ResponseEntity<Void> confirmHead(UUID externalId) {
+    public ResponseEntity<Void> confirmHead(@PathVariable UUID externalId) {
         facade.confirmHead(externalId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
@@ -49,6 +49,13 @@ public class HeadController implements HeadsApi {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         facade.deleteById(id);
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @Override
+    @PatchMapping("/{externalId}/deny")
+    public ResponseEntity<Void> denyHead(@PathVariable UUID externalId) {
+        facade.denyHead(externalId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 

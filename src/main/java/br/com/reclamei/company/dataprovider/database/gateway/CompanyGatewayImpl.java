@@ -1,5 +1,6 @@
 package br.com.reclamei.company.dataprovider.database.gateway;
 
+import br.com.reclamei.company.core.domain.CompanyDetailsDomain;
 import br.com.reclamei.company.core.domain.CompanyDomain;
 import br.com.reclamei.company.core.exception.NotFoundException;
 import br.com.reclamei.company.core.gateway.CompanyGateway;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -53,6 +55,12 @@ public class CompanyGatewayImpl implements CompanyGateway {
             throw new NotFoundException(format("[CompanyGatewayImpl] :: getCompanyByHeadExternalId :: Company with head.external-id %s not found", externalId));
         }
         return mapper.toDomain(company);
+    }
+
+    @Override
+    @Transactional
+    public List<CompanyDomain> findCompaniesPendingApproval() {
+        return mapper.toDomain(repository.findCompaniesPendingApproval());
     }
 
 }

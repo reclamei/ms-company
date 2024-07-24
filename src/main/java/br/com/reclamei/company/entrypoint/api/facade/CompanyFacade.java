@@ -7,6 +7,7 @@ import br.com.reclamei.company.entrypoint.api.dto.CompanyUpdateRequest;
 import br.com.reclamei.company.entrypoint.api.mapper.CompanyApiMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -37,5 +38,9 @@ public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
 
     public CompanyResponse getCompanyByHeadExternalId(final UUID externalId) {
         return mapper.toResponse(useCase.getCompanyByHeadExternalId(externalId));
+    }
+
+    public List<CompanyResponse> findCompaniesPendingApproval() {
+        return mapper.toResponse(useCase.findCompaniesPendingApproval());
     }
 }

@@ -6,6 +6,7 @@ import br.com.reclamei.company.core.gateway.CompanyDetailsGateway;
 import br.com.reclamei.company.core.gateway.CompanyGateway;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -44,5 +45,10 @@ public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway compa
     public CompanyDomain getCompanyByHeadExternalId(final UUID externalId) {
         log.info("[CompanyUseCase] :: getCompanyByHeadExternalId :: Find company details by head [external-id: {}]", externalId);
         return gateway.getCompanyByHeadExternalId(externalId);
+    }
+
+    public List<CompanyDomain> findCompaniesPendingApproval() {
+        log.info("[CompanyUseCase] :: getCompaniesPendingApproval :: Find companies pending approval");
+        return gateway.findCompaniesPendingApproval();
     }
 }

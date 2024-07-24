@@ -1,6 +1,7 @@
 package br.com.reclamei.company.dataprovider.database.gateway;
 
 import br.com.reclamei.company.core.domain.HeadDomain;
+import br.com.reclamei.company.core.domain.HeadStatusEnum;
 import br.com.reclamei.company.core.exception.NotFoundException;
 import br.com.reclamei.company.core.gateway.HeadGateway;
 import br.com.reclamei.company.dataprovider.database.mapper.HeadDatabaseMapper;
@@ -24,8 +25,8 @@ public class HeadGatewayImpl implements HeadGateway {
 
     @Override
     @Transactional
-    public void confirmHead(final UUID externalId) {
-        repository.updateStatus(CONFIRMED, externalId);
+    public void updateHeadStatus(final UUID externalId, final HeadStatusEnum status) {
+        repository.updateStatus(status, externalId);
     }
 
     @Override
