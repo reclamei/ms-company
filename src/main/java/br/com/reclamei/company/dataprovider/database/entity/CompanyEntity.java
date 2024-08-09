@@ -45,7 +45,7 @@ public class CompanyEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "company")
     private List<HeadEntity> heads;
 
 }

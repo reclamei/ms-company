@@ -14,5 +14,7 @@ public interface HeadGateway {
 
     void save(HeadDomain domain);
 
+    void save(List<HeadDomain> domain);
+
     List<HeadDomain> getAllHeadsByCompanyId(Long companyId);
 }

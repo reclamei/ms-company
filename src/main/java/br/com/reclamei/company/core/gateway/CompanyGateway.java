@@ -17,4 +17,6 @@ public interface CompanyGateway {
     CompanyDomain getCompanyByHeadExternalId(UUID externalId);
 
     List<CompanyDomain> findCompaniesPendingApproval();
+
+    Long findIdByCnpj(String cnpj);
 }
