@@ -45,6 +45,12 @@ public class CompanyController implements CompaniesApi {
     }
 
     @Override
+    @GetMapping
+    public ResponseEntity<List<CompanyResponse>> findAll() {
+        return ResponseEntity.status(OK).body(facade.findAll());
+    }
+
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<CompanyResponse> findById(@PathVariable final Long id) {
         return ResponseEntity.status(OK).body(facade.findById(id));

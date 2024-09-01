@@ -34,11 +34,11 @@ public record LocationGatewayImpl(LocationDatabaseMapper mapper, LocationReposit
     }
 
     @Override
-    public LocationDomain findByLocalization(final String city) {
-        if (!repository.existsByName(city)) {
-            throw new NotFoundException(format("[LocationGatewayImpl] :: findByLocalization :: Location with name %s not found", city));
+    public LocationDomain findByLocalization(final String postcode) {
+        if (!repository.existsByPostcode(postcode)) {
+            throw new NotFoundException(format("[LocationGatewayImpl] :: findByLocalization :: Location with postcode %s not found", postcode));
         }
-        return mapper.toDomain(repository.findByName(city));
+        return mapper.toDomain(repository.findByPostcode(postcode));
     }
 
 }

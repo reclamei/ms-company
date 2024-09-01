@@ -24,4 +24,6 @@ public interface CompanyApiMapper {
     CompanyResponse toResponse(CompanyDetailsDomain domain);
 
     List<CompanyResponse> toResponse(List<CompanyDomain> companiesPendingApproval);
+
+    List<CompanyDomain> toDomain(List<CompanyResponse> responses);
 }

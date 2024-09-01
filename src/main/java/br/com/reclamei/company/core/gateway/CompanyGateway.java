@@ -19,4 +19,6 @@ public interface CompanyGateway {
     List<CompanyDomain> findCompaniesPendingApproval();
 
     Long findIdByCnpj(String cnpj);
+
+    List<CompanyDomain> findAll();
 }

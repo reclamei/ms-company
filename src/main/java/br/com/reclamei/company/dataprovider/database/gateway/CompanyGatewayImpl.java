@@ -67,4 +67,10 @@ public class CompanyGatewayImpl implements CompanyGateway {
         return company.map(CompanyEntity::getId).orElse(null);
     }
 
+    @Override
+    @Transactional
+    public List<CompanyDomain> findAll() {
+        return mapper.toDomain(repository.findAll());
+    }
+
 }

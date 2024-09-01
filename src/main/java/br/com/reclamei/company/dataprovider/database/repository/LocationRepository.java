@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
 
-    LocationEntity findByName(String city);
+    LocationEntity findByPostcode(String postcode);
 
-    boolean existsByName(String city);
+    boolean existsByPostcode(String postcode);
 
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -46,6 +47,6 @@ public class CompanyEntity {
     private String description;
 
     @OneToMany(mappedBy = "company")
-    private List<HeadEntity> heads;
+    private List<HeadEntity> heads = new ArrayList<>();
 
 }

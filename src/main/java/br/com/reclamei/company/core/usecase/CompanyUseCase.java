@@ -5,6 +5,7 @@ import br.com.reclamei.company.core.domain.CompanyDomain;
 import br.com.reclamei.company.core.gateway.CompanyDetailsGateway;
 import br.com.reclamei.company.core.gateway.CompanyGateway;
 import br.com.reclamei.company.core.gateway.HeadGateway;
+import br.com.reclamei.company.entrypoint.api.dto.CompanyResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -59,5 +60,10 @@ public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway compa
     public List<CompanyDomain> findCompaniesPendingApproval() {
         log.info("[CompanyUseCase] :: getCompaniesPendingApproval :: Find companies pending approval");
         return gateway.findCompaniesPendingApproval();
+    }
+
+    public List<CompanyDomain> findAll() {
+        log.info("[CompanyUseCase] :: findAll :: Finding all companies");
+        return gateway.findAll();
     }
 }

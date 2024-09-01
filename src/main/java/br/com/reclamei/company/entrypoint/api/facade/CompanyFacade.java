@@ -43,4 +43,9 @@ public record CompanyFacade(CompanyApiMapper mapper, CompanyUseCase useCase) {
     public List<CompanyResponse> findCompaniesPendingApproval() {
         return mapper.toResponse(useCase.findCompaniesPendingApproval());
     }
+
+    public List<CompanyResponse> findAll() {
+        var domainList = useCase.findAll();
+        return mapper.toResponse(domainList);
+    }
 }
