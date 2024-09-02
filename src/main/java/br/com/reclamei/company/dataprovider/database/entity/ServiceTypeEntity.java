@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "service_type")
+@NoArgsConstructor
 public class ServiceTypeEntity {
 
     @Id
@@ -33,4 +35,7 @@ public class ServiceTypeEntity {
     @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ServiceSubtypeEntity> subtypes;
 
+    public ServiceTypeEntity(Long id) {
+        this.id = id;
+    }
 }

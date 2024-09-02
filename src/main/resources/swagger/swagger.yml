@@ -450,7 +450,46 @@ paths:
                     description: The coverage was update successfully
                 '400':
                     description: Error creating the coverage
+        get:
+            tags:
+                - coverages
+            operationId: findAll
+            responses:
+                '200':
+                    description: Coverages was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverages was not found
     /coverages/{serviceTypeId}/{companyId}:
+        get:
+            tags:
+                - coverages
+            operationId: findById
+            parameters:
+                -   name: serviceTypeId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+                -   name: companyId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Coverage was found
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverage was not found
         delete:
             tags:
                 - coverages
@@ -816,7 +855,7 @@ components:
         CoverageCreateRequest:
             type: object
             properties:
-                service_type:
+                serviceType:
                     type: object
                     properties:
                         id:
@@ -853,3 +892,31 @@ components:
                         properties:
                             id:
                                 type: long
+        CoverageResponse:
+            type: object
+            properties:
+                company:
+                    type: object
+                    properties:
+                        id:
+                            type: long
+                        name:
+                            type: string
+                serviceType:
+                    type: object
+                    properties:
+                        id:
+                            type: long
+                        name:
+                            type: string
+                locations:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                            postcode:
+                                type: string

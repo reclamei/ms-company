@@ -4,6 +4,7 @@ import br.com.reclamei.company.core.domain.CoverageDomain;
 import br.com.reclamei.company.core.exception.NotFoundException;
 import br.com.reclamei.company.core.gateway.CoverageGateway;
 import br.com.reclamei.company.dataprovider.database.entity.CoverageEntity;
+import br.com.reclamei.company.dataprovider.database.entity.CoveragePK;
 import br.com.reclamei.company.dataprovider.database.entity.LocationEntity;
 import br.com.reclamei.company.dataprovider.database.entity.RelCoverageLocationEntity;
 import br.com.reclamei.company.dataprovider.database.entity.RelCoverageLocationPK;
@@ -38,6 +39,23 @@ public class CoverageGatewayImpl implements CoverageGateway {
                 "[CompanyGatewayImpl] :: deleteById :: Company with id [service_type_id: %s, company_id: %s] not found", serviceTypeId, companyId));
         }
         repository.deleteByIdServiceTypeIdAndIdCompanyId(serviceTypeId, companyId);
+    }
+
+    @Override
+    @Transactional
+    public List<CoverageDomain> findAll() {
+        return mapper.toDomain(repository.findAll());
+    }
+
+    @Override
+    @Transactional
+    public CoverageDomain findById(Long serviceTypeId, Long companyId) {
+        final var pk = new CoveragePK(companyId, serviceTypeId);
+        final var entity = repository.findById(pk);
+        if (entity.isPresent()) {
+            return mapper.toDomain(entity.get());
+        }
+        return new CoverageDomain();
     }
 
     private static List<RelCoverageLocationEntity> buildRelLocations(final CoverageDomain domain, final CoverageEntity entity) {
