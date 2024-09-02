@@ -902,6 +902,8 @@ components:
                             type: long
                         name:
                             type: string
+                        cnpj:
+                            type: string
                 serviceType:
                     type: object
                     properties:
