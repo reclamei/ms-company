@@ -465,6 +465,28 @@ paths:
                                     "$ref": "#/components/schemas/CoverageResponse"
                 '404':
                     description: Coverages was not found
+    /coverages/{companyId}:
+        get:
+            tags:
+                - coverages
+            operationId: findByCompanyId
+            parameters:
+                -   name: companyId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Coverages was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverage was not found
     /coverages/{serviceTypeId}/{companyId}:
         get:
             tags:
@@ -911,6 +933,17 @@ components:
                             type: long
                         name:
                             type: string
+                    subtypes:
+                        type: array
+                        items:
+                            type: object
+                            properties:
+                                id:
+                                    type: long
+                                name:
+                                    type: string
+                                description:
+                                    type: string
                 locations:
                     type: array
                     items:

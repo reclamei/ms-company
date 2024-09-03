@@ -58,6 +58,11 @@ public class CoverageGatewayImpl implements CoverageGateway {
         return new CoverageDomain();
     }
 
+    @Override
+    public List<CoverageDomain> findByCompanyId(final Long companyId) {
+        return mapper.toDomain(repository.findByIdCompanyId(companyId));
+    }
+
     private static List<RelCoverageLocationEntity> buildRelLocations(final CoverageDomain domain, final CoverageEntity entity) {
         final var coverage = new CoverageEntity(entity.getId());
         return domain.getLocations()

@@ -13,4 +13,6 @@ public interface CoverageGateway {
     List<CoverageDomain> findAll();
 
     CoverageDomain findById(Long serviceTypeId, Long companyId);
+
+    List<CoverageDomain> findByCompanyId(Long companyId);
 }

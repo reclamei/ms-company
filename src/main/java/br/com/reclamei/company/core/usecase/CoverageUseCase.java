@@ -30,4 +30,8 @@ public record CoverageUseCase(CoverageGateway gateway) {
         return gateway.findById(serviceTypeId, companyId);
     }
 
+    public List<CoverageDomain> findByCompanyId(final Long companyId) {
+        log.info("[CoverageUseCase] :: findByCompanyId :: finding coverage with company_id: {}", companyId);
+        return gateway.findByCompanyId(companyId);
+    }
 }

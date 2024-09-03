@@ -50,6 +50,12 @@ public class CoverageController implements CoveragesApi {
     }
 
     @Override
+    @GetMapping("/{companyId}")
+    public ResponseEntity<List<CoverageResponse>> findByCompanyId(@PathVariable final Long companyId) {
+        return ResponseEntity.status(OK).body(facade.findByCompanyId(companyId));
+    }
+
+    @Override
     @GetMapping("/{serviceTypeId}/{companyId}")
     public ResponseEntity<CoverageResponse> findById(@PathVariable final Long serviceTypeId, @PathVariable final Long companyId) {
         return ResponseEntity.status(OK).body(facade.findById(serviceTypeId, companyId));

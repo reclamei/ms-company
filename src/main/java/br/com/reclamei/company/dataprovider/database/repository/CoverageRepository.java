@@ -5,6 +5,8 @@ import br.com.reclamei.company.dataprovider.database.entity.CoveragePK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CoverageRepository extends JpaRepository<CoverageEntity, CoveragePK> {
 
@@ -12,4 +14,5 @@ public interface CoverageRepository extends JpaRepository<CoverageEntity, Covera
 
     void deleteByIdServiceTypeIdAndIdCompanyId(final Long serviceTypeId, final Long companyId);
 
+    List<CoverageEntity> findByIdCompanyId(Long companyId);
 }

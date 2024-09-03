@@ -35,4 +35,9 @@ public record CoverageFacade(CoverageApiMapper mapper, CoverageUseCase useCase) 
         var domain = useCase.findById(serviceTypeId, companyId);
         return mapper.toResponse(domain);
     }
+
+    public List<CoverageResponse> findByCompanyId(Long companyId) {
+        var domain = useCase.findByCompanyId(companyId);
+        return mapper.toResponse(domain);
+    }
 }
