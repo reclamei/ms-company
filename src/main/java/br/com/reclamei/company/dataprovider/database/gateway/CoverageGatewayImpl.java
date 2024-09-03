@@ -59,6 +59,7 @@ public class CoverageGatewayImpl implements CoverageGateway {
     }
 
     @Override
+    @Transactional
     public List<CoverageDomain> findByCompanyId(final Long companyId) {
         return mapper.toDomain(repository.findByIdCompanyId(companyId));
     }

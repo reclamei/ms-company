@@ -933,17 +933,17 @@ components:
                             type: long
                         name:
                             type: string
-                    subtypes:
-                        type: array
-                        items:
-                            type: object
-                            properties:
-                                id:
-                                    type: long
-                                name:
-                                    type: string
-                                description:
-                                    type: string
+                        subtypes:
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    id:
+                                        type: long
+                                    name:
+                                        type: string
+                                    description:
+                                        type: string
                 locations:
                     type: array
                     items:
