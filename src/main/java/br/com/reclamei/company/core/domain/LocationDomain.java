@@ -9,5 +9,6 @@ public class LocationDomain {
 
     private Long id;
     private String name;
+    private String postcode;
 
 }

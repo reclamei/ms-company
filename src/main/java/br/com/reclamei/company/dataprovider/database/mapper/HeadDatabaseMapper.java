@@ -19,4 +19,6 @@ public interface HeadDatabaseMapper {
 
     List<HeadDomain> toDomain(List<HeadEntity> entity);
 
+    List<HeadEntity> toEntity(List<HeadDomain> domain);
+
 }

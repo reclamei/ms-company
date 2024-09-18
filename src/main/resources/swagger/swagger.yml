@@ -222,22 +222,18 @@ paths:
         get:
             tags:
                 - companies
-            operationId: findById
-            parameters:
-                -   name: id
-                    in: path
-                    required: true
-                    schema:
-                        type: long
+            operationId: findAll
             responses:
                 '200':
-                    description: Company was found
+                    description: Companies was found
                     content:
                         application/json:
                             schema:
-                                "$ref": "#/components/schemas/CompanyResponse"
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CompanyResponse"
                 '404':
-                    description: Company was not found
+                    description: Companies was not found
         delete:
             tags:
                 - companies
@@ -253,6 +249,26 @@ paths:
                     description: Company was successfully deleted
                 '404':
                     description: Company was not found
+    /companies/{id}:
+      get:
+        tags:
+          - companies
+        operationId: findById
+        parameters:
+          -   name: id
+              in: path
+              required: true
+              schema:
+                type: long
+        responses:
+          '200':
+            description: Company was found
+            content:
+              application/json:
+                schema:
+                  "$ref": "#/components/schemas/CompanyResponse"
+          '404':
+            description: Company was not found
     /companies/cnpj/{cnpj}:
         get:
             tags:
@@ -434,7 +450,68 @@ paths:
                     description: The coverage was update successfully
                 '400':
                     description: Error creating the coverage
+        get:
+            tags:
+                - coverages
+            operationId: findAll
+            responses:
+                '200':
+                    description: Coverages was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverages was not found
+    /coverages/{companyId}:
+        get:
+            tags:
+                - coverages
+            operationId: findByCompanyId
+            parameters:
+                -   name: companyId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Coverages was found
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverage was not found
     /coverages/{serviceTypeId}/{companyId}:
+        get:
+            tags:
+                - coverages
+            operationId: findById
+            parameters:
+                -   name: serviceTypeId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+                -   name: companyId
+                    in: path
+                    required: true
+                    schema:
+                        type: long
+            responses:
+                '200':
+                    description: Coverage was found
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/CoverageResponse"
+                '404':
+                    description: Coverage was not found
         delete:
             tags:
                 - coverages
@@ -761,20 +838,28 @@ components:
         LocationCreateRequest:
             required:
                 - name
+                - postcode
             type: object
             properties:
                 name:
+                    type: string
+                    example: Harry Potter
+                postcode:
                     type: string
                     example: Harry Potter
         LocationUpdateRequest:
             required:
                 - id
                 - name
+                - postcode
             type: object
             properties:
                 id:
                     type: long
                 name:
+                    type: string
+                    example: Harry Potter
+                postcode:
                     type: string
                     example: Harry Potter
         LocationResponse:
@@ -785,11 +870,14 @@ components:
                 name:
                     type: string
                     example: Harry Potter
+                postcode:
+                    type: string
+                    example: Harry Potter
 
         CoverageCreateRequest:
             type: object
             properties:
-                service_type:
+                serviceType:
                     type: object
                     properties:
                         id:
@@ -826,3 +914,44 @@ components:
                         properties:
                             id:
                                 type: long
+        CoverageResponse:
+            type: object
+            properties:
+                company:
+                    type: object
+                    properties:
+                        id:
+                            type: long
+                        name:
+                            type: string
+                        cnpj:
+                            type: string
+                serviceType:
+                    type: object
+                    properties:
+                        id:
+                            type: long
+                        name:
+                            type: string
+                        subtypes:
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    id:
+                                        type: long
+                                    name:
+                                        type: string
+                                    description:
+                                        type: string
+                locations:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                type: long
+                            name:
+                                type: string
+                            postcode:
+                                type: string

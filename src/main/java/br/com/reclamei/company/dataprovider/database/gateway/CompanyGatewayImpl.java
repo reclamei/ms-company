@@ -1,9 +1,9 @@
 package br.com.reclamei.company.dataprovider.database.gateway;
 
-import br.com.reclamei.company.core.domain.CompanyDetailsDomain;
 import br.com.reclamei.company.core.domain.CompanyDomain;
 import br.com.reclamei.company.core.exception.NotFoundException;
 import br.com.reclamei.company.core.gateway.CompanyGateway;
+import br.com.reclamei.company.dataprovider.database.entity.CompanyEntity;
 import br.com.reclamei.company.dataprovider.database.mapper.CompanyDatabaseMapper;
 import br.com.reclamei.company.dataprovider.database.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,6 @@ public class CompanyGatewayImpl implements CompanyGateway {
     @Override
     public void save(final CompanyDomain domain) {
         var entity = mapper.toEntity(domain);
-        entity.getHeads().forEach(item -> item.setCompany(entity));
-
         repository.save(entity);
     }
 
@@ -61,6 +59,18 @@ public class CompanyGatewayImpl implements CompanyGateway {
     @Transactional
     public List<CompanyDomain> findCompaniesPendingApproval() {
         return mapper.toDomain(repository.findCompaniesPendingApproval());
+    }
+
+    @Override
+    public Long findIdByCnpj(final String cnpj) {
+        final var company = repository.findByCnpj(cnpj);
+        return company.map(CompanyEntity::getId).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public List<CompanyDomain> findAll() {
+        return mapper.toDomain(repository.findAll());
     }
 
 }

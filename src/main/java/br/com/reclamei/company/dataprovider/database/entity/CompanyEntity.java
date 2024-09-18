@@ -10,14 +10,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "company")
+@NoArgsConstructor
 public class CompanyEntity {
 
     @Id
@@ -45,7 +48,10 @@ public class CompanyEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.PERSIST)
-    private List<HeadEntity> heads;
+    @OneToMany(mappedBy = "company")
+    private List<HeadEntity> heads = new ArrayList<>();
 
+    public CompanyEntity(Long id) {
+        this.id = id;
+    }
 }

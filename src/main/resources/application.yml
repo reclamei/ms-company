@@ -25,6 +25,7 @@ spring:
         enabled: true
         change-log: classpath:/liquibase/master.xml
         default-schema: company_db
+#        drop-first: true
     cloud:
       openfeign:
         client:

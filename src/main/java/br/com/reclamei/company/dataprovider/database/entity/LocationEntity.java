@@ -24,6 +24,9 @@ public class LocationEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "postcode", nullable = false)
+    private String postcode;
+
     public LocationEntity(final Long id) {
         this.id = id;
     }

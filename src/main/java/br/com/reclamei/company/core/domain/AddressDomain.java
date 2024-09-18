@@ -13,4 +13,5 @@ public class AddressDomain {
     private String town;
     private String city;
     private String state;
+    private String postcode;
 }

@@ -44,6 +44,12 @@ public class HeadGatewayImpl implements HeadGateway {
     }
 
     @Override
+    public void save(List<HeadDomain> domains) {
+        var entities = mapper.toEntity(domains);
+        repository.saveAll(entities);
+    }
+
+    @Override
     public List<HeadDomain> getAllHeadsByCompanyId(final Long companyId) {
         return mapper.toDomain(repository.findAllByCompanyId(companyId));
     }

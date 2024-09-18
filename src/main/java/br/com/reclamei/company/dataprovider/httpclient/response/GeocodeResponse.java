@@ -27,5 +27,6 @@ public class GeocodeResponse {
         private String town;
         private String city;
         private String state;
+        private String postcode;
     }
 }

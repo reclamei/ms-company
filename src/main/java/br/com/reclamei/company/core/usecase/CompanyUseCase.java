@@ -4,21 +4,31 @@ import br.com.reclamei.company.core.domain.CompanyDetailsDomain;
 import br.com.reclamei.company.core.domain.CompanyDomain;
 import br.com.reclamei.company.core.gateway.CompanyDetailsGateway;
 import br.com.reclamei.company.core.gateway.CompanyGateway;
+import br.com.reclamei.company.core.gateway.HeadGateway;
+import br.com.reclamei.company.entrypoint.api.dto.CompanyResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
-public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway companyDetailsGateway) {
+public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway companyDetailsGateway, HeadGateway headGateway) {
 
     public void save(final CompanyDomain domain) {
         log.info("[CompanyUseCase] :: create :: Creating new company. {}", domain);
-        domain.getHeads().stream().findFirst()
-            .ifPresent(head -> {
-                head.setIsAdmin(Boolean.TRUE);
-                head.setEmail(domain.getEmail());
-            });
+
+        final var companyId = gateway.findIdByCnpj(domain.getCnpj());
+        if(Objects.nonNull(companyId)) {
+            domain.getHeads().forEach(head -> {
+                    head.setIsAdmin(Boolean.TRUE);
+                    head.setEmail(domain.getEmail());
+                    head.setCompanyId(companyId);
+                });
+            domain.setId(companyId);
+            headGateway.save(domain.getHeads());
+        }
+
         gateway.save(domain);
     }
 
@@ -50,5 +60,10 @@ public record CompanyUseCase(CompanyGateway gateway, CompanyDetailsGateway compa
     public List<CompanyDomain> findCompaniesPendingApproval() {
         log.info("[CompanyUseCase] :: getCompaniesPendingApproval :: Find companies pending approval");
         return gateway.findCompaniesPendingApproval();
+    }
+
+    public List<CompanyDomain> findAll() {
+        log.info("[CompanyUseCase] :: findAll :: Finding all companies");
+        return gateway.findAll();
     }
 }
