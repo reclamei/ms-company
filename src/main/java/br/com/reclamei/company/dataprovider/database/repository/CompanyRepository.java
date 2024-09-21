@@ -15,7 +15,7 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
     @Query("SELECT c FROM HeadEntity h INNER JOIN CompanyEntity c ON h.company.id = c.id WHERE h.externalId = :externalId")
     CompanyEntity findByHeadExternalId(final UUID externalId);
 
-    @Query("SELECT c FROM CompanyEntity c INNER JOIN HeadEntity h ON h.company.id = c.id WHERE h.isAdmin = true AND h.status = 'PENDING_CONFIRMATION'")
+    @Query("SELECT c FROM CompanyEntity c INNER JOIN HeadEntity h ON h.company.id = c.id WHERE h.isAdmin = true AND h.status = 'PENDING_APPROVAL'")
     List<CompanyEntity> findCompaniesPendingApproval();
 
     Optional<CompanyEntity> findByCnpj(String cnpj);

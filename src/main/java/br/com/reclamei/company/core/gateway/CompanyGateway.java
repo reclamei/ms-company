@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface CompanyGateway {
 
-    void save(CompanyDomain domain);
+    CompanyDomain save(CompanyDomain domain);
 
     CompanyDomain findById(Long id);
 

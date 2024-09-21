@@ -24,9 +24,9 @@ public class CompanyGatewayImpl implements CompanyGateway {
     private final CompanyRepository repository;
 
     @Override
-    public void save(final CompanyDomain domain) {
+    public CompanyDomain save(final CompanyDomain domain) {
         var entity = mapper.toEntity(domain);
-        repository.save(entity);
+        return mapper.toDomain(repository.saveAndFlush(entity));
     }
 
     @Override
