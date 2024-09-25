@@ -8,15 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.UUID;
 
-import static br.com.reclamei.company.core.domain.HeadStatusEnum.*;
-
 @Slf4j
 public record HeadUseCase(HeadGateway gateway) {
-
-    public void confirmHead(final UUID externalId) {
-        log.info("[HeadUseCase] :: confirm :: confirming head with external-id: {}", externalId);
-        gateway.updateHeadStatus(externalId, CONFIRMED);
-    }
 
     public void deleteById(final Long id) {
         log.info("[HeadUseCase] :: delete :: deleting head with id: {}", id);
@@ -33,8 +26,8 @@ public record HeadUseCase(HeadGateway gateway) {
         return gateway.getAllHeadsByCompanyId(companyId);
     }
 
-    public void denyHead(UUID externalId) {
-        log.info("[HeadUseCase] :: deny :: denying registration of head with external-id: {}", externalId);
-        gateway.updateHeadStatus(externalId, DENIED);
+    public void updateStatus(final UUID externalId, final HeadStatusEnum status) {
+        log.info("[HeadUseCase] :: updateStatus :: updating head status [external-id: {}, status: {}]", externalId, status);
+        gateway.updateHeadStatus(externalId, status);
     }
 }

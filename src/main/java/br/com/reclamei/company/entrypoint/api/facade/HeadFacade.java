@@ -1,5 +1,6 @@
 package br.com.reclamei.company.entrypoint.api.facade;
 
+import br.com.reclamei.company.core.domain.HeadStatusEnum;
 import br.com.reclamei.company.core.usecase.HeadUseCase;
 import br.com.reclamei.company.entrypoint.api.dto.HeadCreateRequest;
 import br.com.reclamei.company.entrypoint.api.dto.HeadResponse;
@@ -10,12 +11,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.UUID;
 
+import static br.com.reclamei.company.core.domain.HeadStatusEnum.*;
+
 @Component
 public record HeadFacade(HeadApiMapper mapper, HeadUseCase useCase) {
-
-    public void confirmHead(final UUID externalId) {
-        useCase.confirmHead(externalId);
-    }
 
     public void create(final HeadCreateRequest request) {
         var domain = mapper.toDomain(request);
@@ -36,6 +35,14 @@ public record HeadFacade(HeadApiMapper mapper, HeadUseCase useCase) {
     }
 
     public void denyHead(final UUID externalId) {
-        useCase.denyHead(externalId);
+        useCase.updateStatus(externalId, DENIED);
+    }
+
+    public void confirmHead(final UUID externalId) {
+        useCase.updateStatus(externalId, CONFIRMED);
+    }
+
+    public void approveHead(final UUID externalId) {
+        useCase.updateStatus(externalId, PENDING_CONFIRMATION);
     }
 }
