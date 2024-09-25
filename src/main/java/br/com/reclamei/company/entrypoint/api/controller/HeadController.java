@@ -32,6 +32,13 @@ public class HeadController implements HeadsApi {
     private final HeadFacade facade;
 
     @Override
+    @PatchMapping("/{externalId}/approve")
+    public ResponseEntity<Void> approveHead(@PathVariable UUID externalId) {
+        facade.approveHead(externalId);
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @Override
     @PatchMapping("/{externalId}/confirm")
     public ResponseEntity<Void> confirmHead(@PathVariable UUID externalId) {
         facade.confirmHead(externalId);

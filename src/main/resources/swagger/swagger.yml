@@ -188,6 +188,23 @@ paths:
                     description: The head was update successfully
                 '400':
                     description: Error updating the head
+    /heads/{externalId}/approve:
+        patch:
+            tags:
+                - heads
+            operationId: approveHead
+            parameters:
+                -   name: externalId
+                    in: path
+                    required: true
+                    schema:
+                        type: string
+                        format: uuid
+            responses:
+                '204':
+                    description: The head was update successfully
+                '400':
+                    description: Error updating the head
     /companies:
         post:
             tags:
