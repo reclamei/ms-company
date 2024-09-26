@@ -45,4 +45,8 @@ public record HeadFacade(HeadApiMapper mapper, HeadUseCase useCase) {
     public void approveHead(final UUID externalId) {
         useCase.updateStatus(externalId, PENDING_CONFIRMATION);
     }
+
+    public void requestApproval(final UUID externalId) {
+        useCase.updateStatus(externalId, PENDING_APPROVAL);
+    }
 }
