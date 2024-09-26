@@ -33,48 +33,55 @@ public class HeadController implements HeadsApi {
 
     @Override
     @PatchMapping("/{externalId}/approve")
-    public ResponseEntity<Void> approveHead(@PathVariable UUID externalId) {
+    public ResponseEntity<Void> approveHead(@PathVariable final UUID externalId) {
         facade.approveHead(externalId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override
     @PatchMapping("/{externalId}/confirm")
-    public ResponseEntity<Void> confirmHead(@PathVariable UUID externalId) {
+    public ResponseEntity<Void> confirmHead(@PathVariable final UUID externalId) {
         facade.confirmHead(externalId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> create(@Valid @RequestBody HeadCreateRequest body) {
+    public ResponseEntity<Void> create(@Valid @RequestBody final HeadCreateRequest body) {
         facade.create(body);
         return ResponseEntity.status(CREATED).build();
     }
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable final Long id) {
         facade.deleteById(id);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override
     @PatchMapping("/{externalId}/deny")
-    public ResponseEntity<Void> denyHead(@PathVariable UUID externalId) {
+    public ResponseEntity<Void> denyHead(@PathVariable final UUID externalId) {
         facade.denyHead(externalId);
         return ResponseEntity.status(NO_CONTENT).build();
     }
 
     @Override
     @GetMapping("/company/{companyId}")
-    public ResponseEntity<List<HeadResponse>> getAllHeadsByCompanyId(@PathVariable Long companyId) {
+    public ResponseEntity<List<HeadResponse>> getAllHeadsByCompanyId(@PathVariable final Long companyId) {
         return ResponseEntity.status(OK).body(facade.getAllHeadsByCompanyId(companyId));
     }
 
     @Override
+    @PatchMapping("/{externalId}/request-approval")
+    public ResponseEntity<Void> requestApproval(@PathVariable final UUID externalId) {
+        facade.requestApproval(externalId);
+        return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    @Override
     @PutMapping
-    public ResponseEntity<Void> update(@Valid @RequestBody HeadUpdateRequest body) {
+    public ResponseEntity<Void> update(@Valid @RequestBody final HeadUpdateRequest body) {
         facade.update(body);
         return ResponseEntity.status(NO_CONTENT).build();
     }
